@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+header{
+	position:fixed;
+	height: 5vh;
+	width:100%;
+	
+}
+section{
+	
+	padding-top:150px;
+	padding-bottom:150px;	
+	
+	background: linear-gradient(45deg,#C9FFBF,#FFAFBD);
+}
+footer{
+	width:100%;
+	height:20vh;
+	background: linear-gradient(45deg, #ED4264,#FFEDBC);
+	color:white;
+	text-align:center;
+	position:fixed;
+	width:100%;
+	
+}

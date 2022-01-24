@@ -1,25 +1,19 @@
 @charset "UTF-8";
 
 header{
-	/*position:fixed;*/
-	height: 200px;
+	position:fixed;
+	height: 10vh;
 	width:10%;
 	
+}	
+img{
+	height: 10vh;
+	width:10%;
 }
 section{
 	
 	padding-top:150px;
 	padding-bottom:150px;	
 	
-	
-}
-footer{
-	width:100%;
-	height:20vh;
-	
-	color:white;
-	text-align:center;
-	position:fixed;
-	width:100%;
 	
 }

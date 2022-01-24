@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="<%=request.getContextPath()%>css/base.css" rel="stylesheet">
+<link href="/css/base.css" rel="stylesheet">
 </head>
 <body>
 <%@ include file="header.jsp"%>

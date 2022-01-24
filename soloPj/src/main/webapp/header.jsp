@@ -2,5 +2,5 @@
     pageEncoding="UTF-8"%>
 <link href="<%=request.getContextPath()%>css/base.css" rel="stylesheet">
 <header>
-<img src="img/head.png">
+<img src="img/head.png" id="head">
 </header>

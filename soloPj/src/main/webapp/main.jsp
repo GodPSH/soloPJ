@@ -8,7 +8,10 @@
 </head>
 <body>
 <%@ include file="header.jsp"%>
+<section>
 test
+</section>
+
 <%@ include file="footer.jsp" %>
 </body>
 </html>

@@ -3,12 +3,26 @@
 header{
 	position:fixed;
 	height: 10vh;
-	width:10%;
-	
+	width:100%;
 }	
+.head{
+	margin:0px;
+	text-align: center;
+	width:800px;
+	height:250px;
+
+	}
 img{
-	height: 10vh;
-	width:10%;
+	background-position: center;
+	max-height:60%;
+	max-width:60%;
+}
+
+.login{
+	position:absolute;
+	right:10px;
+	top:10px;
+	
 }
 section{
 	

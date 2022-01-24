@@ -19,8 +19,10 @@ img{
 }
 
 .login{
+	
+   	
 	  clear:both;
-       position: absolute;
+      position: absolute;
        width: 200;
        height: 30px;
        float: right;

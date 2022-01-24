@@ -8,8 +8,8 @@
 			|
 			<a href="<%=request.getContextPath()%>/login/login.jsp">회원가입</a>
 	</div>
-	<!-- <div class="head">
+	<div class="head">
 	<img src="img/head.png" >
-	</div> -->
+	</div>
 </div>
 </header>

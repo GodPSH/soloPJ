@@ -12,7 +12,7 @@
 			<a href="<%=request.getContextPath()%>/login/login.jsp">회원가입</a>
 	</div>
 	<div class="head">
-		
+		<img src="">
 	</div>
 </div>
 </header>

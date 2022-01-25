@@ -1,15 +1,13 @@
 @charset "UTF-8";
 
 header{
-	
-	background : #F03861;
 	position:fixed;
 	height: 10vh;
 	width:100%;
 	padding: 0px;
-	margin: 0px
-	
-}	
+	margin: 0px;
+	background: #F03861;	
+}
 .head{
 	margin:0px;
 	text-align: center;

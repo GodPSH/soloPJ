@@ -3,7 +3,7 @@
 <link href="<%=request.getContextPath()%>/css/base.css" rel="stylesheet">
 <header>
 <div>
-	<div><img src="./img/head.png" height=200px width="200px"></div>
+	<div><img class="headimg" src="./img/head.png" height=150px width="150px"></div>
 	<ul class="menulist">
 		<li><a class="active" href="main.jsp">Home</a></li>
 		<li><a >전체 글</a></li>
@@ -19,8 +19,6 @@
 			|
 			<a href="<%=request.getContextPath()%>/login/login.jsp">회원가입</a>
 	</div>
-	<div class="head">
-		<img src="">
-	</div>
+	
 </div>
 </header>

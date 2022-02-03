@@ -3,9 +3,10 @@
 <link href="<%=request.getContextPath()%>/css/base.css" rel="stylesheet">
 <header>
 <div>
-	<ul>
+	<div><img src="./img/head.png" height=200px width="200px"></div>
+	<ul class="menulist">
 		<li><a class="active" href="main.jsp">Home</a></li>
-		<li><a>전체 글</a></li>
+		<li><a >전체 글</a></li>
 		<li><a>공지사항</a></li>
 		<li><a>팀 소개</a></li>
 		<li><a>하이라이트/해외축구</a></li>

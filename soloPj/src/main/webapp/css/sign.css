@@ -1,0 +1,96 @@
+@charset "UTF-8";
+body{
+				margin:0px;
+				background:#FAFAFA;
+				font-family:Arial, "돋움", dotum, sans-serif;
+			}
+			section{
+				width:500px;
+				height:680px;
+				background:white;
+				text-align:center;
+				margin:10vh auto;
+				border:1px solid black;
+				border-radius:5px;
+			}
+			form{
+				width:55%;
+				height:100%;
+				margin:auto;
+			}
+			.header{
+				font-size:30px;
+				padding:10px 0px;
+				cursor:pointer;
+			}
+			.header:first-letter{
+				font-weight:bold;
+				color:red;
+			}
+			.header:first-letter{
+				font-weight:bold;
+				color:red;
+			}
+			input{
+				height:30px;
+				width:267px;
+			}
+			input[type=submit]{
+				width:100%;
+				height:40px;
+				padding:0px;
+			}
+			.rows{
+				width:100%;
+				text-align:left;
+			}
+			.rows:not(.h){
+				padding-bottom:15px;
+			}
+			div.id{
+				text-align:left;
+			}
+			input[type=text].id{
+				width:177px;
+			}
+			input[type=button].id{
+				width:85px;
+				height:36px;
+				maign-top:2px;
+				margin-bottom:0px;
+			}
+			#birth1{
+				width:110px;
+				
+				
+			}
+			.birth2{
+				width:80px;
+				height:37px;
+			}
+			input[type=radio]{
+				width:30px;
+				height:inherit;
+			}
+			#phone1{
+				width:80px;
+				height:35px;
+			}
+			#addr{
+				width:80px;
+				height:35px;
+			}
+			#phone2, #phone3{
+				width:80px;
+				height:30px;
+			}
+			.red{
+				color:red;
+			}
+			.check{
+				display:none;
+				margin:10px;
+				position:absolute;
+				height:30px;
+				font-size:9pt;
+			}

@@ -17,7 +17,7 @@
 
       <div class="headbtn">
         
-        <button type="button" class="btn btn-primary" href="/login/sign.jsp">회원가입</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='login/sign.jsp'">회원가입</button>
         <button type="button"  class="btn btn-primary">로그인</button>
         <button type="button" class="btn btn-primary" href="main.jsp">홈</button>
       </div>

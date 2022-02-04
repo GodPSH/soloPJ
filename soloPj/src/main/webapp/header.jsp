@@ -8,7 +8,7 @@
 	  	<h2>EzenFc 오신걸 환영합니다.</h2>
 	  </div>
       <ul>
-        <li><a href="#" class="nav-link px-2 link-dark">홈</a></li>
+        
         <li><a href="#" class="nav-link px-2 link-dark">전체 글</a></li>
         <li><a href="#" class="nav-link px-2 link-dark">공지사항</a></li>
         <li><a href="#" class="nav-link px-2 link-dark">팀 소개</a></li>
@@ -16,7 +16,9 @@
       </ul>
 
       <div class="headbtn">
-        <button type="button" class="btn btn-primary">로그아웃</button>
+        
+        <button type="button" class="btn btn-primary" href="/login/sign.jsp">회원가입</button>
         <button type="button"  class="btn btn-primary">로그인</button>
+        <button type="button" class="btn btn-primary" href="main.jsp">홈</button>
       </div>
     </header>

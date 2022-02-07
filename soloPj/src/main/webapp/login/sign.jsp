@@ -11,7 +11,7 @@
 	<script type="text/javascript">
 	function checkFn(type){
 		if(type == 'id'){
-			var checkId = /^[a-z]+[a-z0-9]{5,15}/g;
+			var checkId = /^[a-z]+[a-z0-9]{4,15}/g;
 			var value = document.frm.id.value;
 			var span = document.getElementsByClassName("id")[0].getElementsByTagName("span")[0];
 			if(value == ""){
@@ -27,7 +27,7 @@
 				span.style.display = "none";
 			}
 		}else if(type == 'pass'){
-			var checkId = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
+			var checkId = /^.*(?=^.{4,15}$)(?=.*\d)(?=.*[a-zA-Z]).*$/;
 			var value = document.frm.password.value;
 			var span = document.getElementsByClassName("password")[0].getElementsByTagName("span")[0];
 			if(value == ""){
@@ -107,7 +107,7 @@
 				span.style.display = "none";
 			}
 		}else if(type =='birth'){
-			var checkBirth = /^(19[0-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])/g;
+			var checkBirth = /([0-9]{2}(0[1-9]|1[0-2])(0[1-9]|[1,2][0-9]|3[0,1]))/g;
 			var value = document.frm.birth.value;
 			var span = document.getElementsByClassName("birth")[0].getElementsByTagName("span")[0];
 			if(value == ""){
@@ -124,19 +124,20 @@
 			}
 		}
 	}
+
+	
 	</script>
 </head>
 <body>
 	<section>
-		<form name="frm" action="#" method="post">
+		<form name="frm" method="post" action="signOk.jsp">
 			<div class="header">회원가입</div>
 			<div class="rows h">
 				<label for="id">아이디<span class="red">*</span></label>
 			</div>
 			<div class="rows id">
-				<input type="text" class="id impor" name="id" id="id"
-					placeholder="아이디를 입력하세요." onblur="checkFn('id')"> <input
-					type="button" class="id" value="id 중복확인"> <span
+				<input type="text" class="id impor" name="membid" id="id"
+					placeholder="아이디를 입력하세요." onblur="checkFn('id')"> <span
 					class="check"></span>
 			</div>
 			<div class="rows h">
@@ -144,7 +145,7 @@
 			</div>
 
 			<div class="rows password">
-				<input type="password" class="impor" name="password" id="password"
+				<input type="password" class="impor" name="membpw" id="password"
 					placeholder="비밀번호를 입력하세요." onblur="checkFn('pass')"> <span
 					class="check"></span>
 			</div>
@@ -152,13 +153,13 @@
 					<label for="name">이름<span class="red">*</span></label>
 				</div>
 				<div class="rows name">
-					<input type="text" class="impor" name="name" id="name" placeholder="이름을 입력하세요." onblur="checkFn('name')">
+					<input type="text" class="impor" name="membname" id="name" placeholder="이름을 입력하세요." onblur="checkFn('name')">
 					<span class="check"></span>
 				</div>
 			<div class="rows h">
 				<label for="addr">주소<span class="red">*</span></label>
 				<div class="rows addr">
-				<select name="addr" id="addr">
+				<select name="membaddr" id="addr">
 						<option value="서울">서울</option>
 						<option value="경기도">경기도</option>
 						<option value="강원도">강원도</option>
@@ -181,22 +182,25 @@
 					<label for="birth">생년월일<span class="red">*</span></label>
 				</div>
 				<div class="rows birth">
-					<input type="text" class="birth" name="birth" id="birth1" placeholder="예시)2022-01-01" maxlength="10" onblur="checkFn('birth')"><span class="check"></span>					
+					<input type="text" class="birth" name="membage" id="birth1" placeholder="예시)220207" maxlength="10" onblur="checkFn('birth')"><span class="check"></span>					
 				</div>
 			<div class="rows h">
 					<label for="phone1">연락처<span class="red">*</span></label>
 				</div>
 				<div class="rows phone">
-					<select name="phone1" id="phone1">
+					<select name="membph" id="phone1">
 						<option value="010">010</option>
 						<option value="010">011</option>
 						<option value="010">016</option>
 					</select>&nbsp;
-					<input type="text" class="impor" name="phone2" id="phone2" placeholder="연락처2" maxlength="4" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" onblur="checkFn('phone2')">&nbsp;
-					<input type="text" class="impor" name="phone3" id="phone3" placeholder="연락처3" maxlength="4" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" onblur="checkFn('phone3')">
+					<input type="text" class="impor" name="membph2" id="phone2" placeholder="연락처2" maxlength="4" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" onblur="checkFn('phone2')">&nbsp;
+					<input type="text" class="impor" name="membph3" id="phone3" placeholder="연락처3" maxlength="4" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" onblur="checkFn('phone3')">
 					<span class="check"></span>
 				</div>
-				<button>확인</button>
+				<div class="sign-btn-wrap">
+				<input class="sign-btn" type="button" value="취소">
+				<input class="sign-btn" type="submit" value="확인">
+				</div>
 		</form>
 		
 	</section>

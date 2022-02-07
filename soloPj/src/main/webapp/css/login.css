@@ -1,0 +1,60 @@
+@charset "UTF-8";
+
+body {
+	background: radial-gradient(#ff0844 0%, #ffb199 100%) fixed;
+}
+
+form {
+	width: 55%;
+	height: 100%;
+	margin: auto;
+	padding-bottom: 10%;
+	padding-top: 20%;
+}
+
+section {
+	background: radial-gradient(#ff0844 0%, #ffb199 100%) fixed;
+	width: 30%;
+	height: 40%;
+	text-align: center;
+	margin: 10vh auto;
+	border-radius: 5px;
+}
+
+input {
+	width: 100%;
+	height: 50px;
+	border-radius: 30px;
+	margin-top: 10px;
+	padding: 0px 20px;
+	border: 1px solid lightgray;
+	outline: none;
+}
+
+.login-pw {
+	padding-top: 20px;
+}
+
+.login-btn-wrap {
+	margin-top: 40px;
+	display: flex;
+	
+	align-items: center;;
+	
+}
+
+.login-btn-wrap .login-btn {
+	width: 95px;
+	height: 35px;
+	color: white;
+	border: 0;
+	border-radius: 4px;
+	background: rgb(105, 163, 255);
+	background: linear-gradient(162deg, rgba(105, 163, 255, 1) 0%,
+		rgba(43, 125, 254, 1) 50%, rgba(43, 125, 254, 1) 100%);
+}
+a{
+	padding-top:20px;
+	text-decoration: none;
+	text-decoration-color: black;
+}

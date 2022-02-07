@@ -38,7 +38,7 @@ ul{
 	
 }
 ul li{
-	padding-left: 100px;
+	padding-left: 120px;
 	float:left
 }
 ul li a{
@@ -60,4 +60,7 @@ ul li a{
        right: 40px;
 
        
+}
+section{
+	padding-left: 20%;
 }

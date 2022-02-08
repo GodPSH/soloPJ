@@ -198,8 +198,8 @@
 					<span class="check"></span>
 				</div>
 				<div class="sign-btn-wrap">
-				<input class="sign-btn" type="button" value="취소">
 				<input class="sign-btn" type="submit" value="확인">
+				<input class="sign-btn" type="button" value="취소" onclick="location.href='../main.jsp'">
 				</div>
 		</form>
 		

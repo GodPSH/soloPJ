@@ -11,22 +11,22 @@
 <body>
 
 <section >
-	<form class="login-input">
+	<form class="login-input" action="loginOk.jsp" method="post">
 		<img src="head.png" width="150" height="120">
 		<h1 >로그인 해주세요!</h1>
-		<div class="login-id">
-		<input type="text" name="membid" placeholder="아이디를 입력하세요">
 		
+		<div class="login-id">
+		<input type="text" name="membid" placeholder="아이디를 입력하세요">	
 		</div>
+		
 		<div class="login-pw">
 		<input type="password" name="membpw" placeholder="비밀번호를 입력하세요">
+		</div>
 		
-		</div>
 		<div class="login-btn-wrap">
-			<button class="login-btn">로그인</button>
-			
+			<input class="login-btn" type="submit" value="로그인">
 		</div>
-		<a href="../main.jsp">홈</a>
+		<a href="<%=request.getContextPath()%>/main.jsp">홈</a>
 	</form>
 </section>
 

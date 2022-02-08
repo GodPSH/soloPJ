@@ -1,17 +1,18 @@
 package soloPjWeb;
 
 public class Memb {
-	private String mbidx;
+	private int mbidx;
 	private String membid;
 	private String membpw;
 	private String membname;
 	private String membaddr;
 	private int membage;
 	private String membph ;
-	public String getMbidx() {
+	
+	public int getMbidx() {
 		return mbidx;
 	}
-	public void setMbidx(String mbidx) {
+	public void setMbidx(int mbidx) {
 		this.mbidx = mbidx;
 	}
 	public String getMembid() {

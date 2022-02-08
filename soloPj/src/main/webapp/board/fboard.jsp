@@ -3,20 +3,18 @@
 <%@ page import="java.sql.*"%>
 <%@ page import="soloPjWeb.*"%>
 <%
-
-	Memb login = (Memb)session.getAttribute("loginUser");
+	Memb mlogin = (Memb)session.getAttribute("loginUser");
 	request.setCharacterEncoding("UTF-8");
 	
 	String searchValue = request.getParameter("searchValue");
 	String searchType = request.getParameter("searchType");
 	
-	
-	
 	Connection conn =null;
 	PreparedStatement psmt =null;
 	ResultSet rs=null;
+	PagingUtil paging =null;
 	
-	try{
+	try{ 
 		conn = DBManager.getConnection();
 		String sql = "";
 		sql = " select count(*) as total from fboard ";
@@ -28,11 +26,11 @@
 			}
 			
 		}
-		
 		psmt = conn.prepareStatement(sql);
 		
 		rs = psmt.executeQuery();
-%>
+	
+ %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,9 +48,9 @@
 		<article>
 			<div class="all-top">
 				<form action="all.jsp">
-				<select>
-					<option value="fsubject"<%if(searchType !=null && searchType.equals("subject")) out.println("selected"); %>>글제목</option>
-					<option value="fwriter"<%if(searchType !=null && searchType.equals("writer")) out.println("selected"); %>>작성자</option>
+				<select name="searchType">
+					<option value="fsubject" <%if(searchType !=null && searchType.equals("fsubject")) out.println("selected"); %>>글제목</option>
+					<option value="fwriter" <%if(searchType !=null && searchType.equals("fwriter")) out.println("selected"); %>>작성자</option>
 				</select> 
 				<input type="text" name="searchValue" <%if(searchValue !=null && !searchValue.equals("")) out.print("value='"+searchValue+"'"); %>> 
 				<input type="submit" value="검색">
@@ -87,7 +85,6 @@
 				</tbody>
 				
 			</table>
-			
 			<button onclick="location.href='insert.jsp'">등록</button>
 			
 		</article>

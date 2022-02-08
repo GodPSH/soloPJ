@@ -12,7 +12,7 @@
 	Connection conn =null;
 	PreparedStatement psmt =null;
 	ResultSet rs=null;
-	PagingUtil paging =null;
+	
 	
 	try{ 
 		conn = DBManager.getConnection();
@@ -72,21 +72,23 @@
 					while(rs.next()){
 				%>
 					<tr>
-						<td><%=rs.getInt("fidx")%></td>
-						<td><%=rs.getInt("fsubject")%></td>
-						<td><%=rs.getInt("fcontent")%></td>
-						<td><%=rs.getInt("fwriter")%></td>
-						<td><%=rs.getInt("fwriteday")%></td>
-						<td><%=rs.getInt("fhit")%></td>
+						 <td><%=rs.getInt("fidx")%></td>
+						<td><%=rs.getString("fsubject")%></td>
+						<td><%=rs.getString("fcontent")%></td>
+						<td><%=rs.getString("fwriter")%></td>
+						<td><%=rs.getString("fwriteday")%></td>
+						<td><%=rs.getInt("fhit")%></td> 
+						
 					</tr>
 				<% 
 					}
-				%>	
+				%>
 				</tbody>
 				
 			</table>
+			<%if(mlogin !=null){ %>
 			<button onclick="location.href='insert.jsp'">등록</button>
-			
+			<%} %>
 		</article>
 		<%@ include file="../footer.jsp"%>
 	</section>

@@ -49,16 +49,13 @@ if (ilogin != null) {
 							<textarea name="fcontent" rows="3"></textarea>
 						</td>
 					</tr>
-					<tr>
-					</tr>
-					<tr>
-					</tr>
 				</tbody>
 			</table>
 			<input type="submit" value="등록">
 			<input type="button" value="취소" onclick="location.href='fboard.jsp'">
 
 		</form>
+		
 	</section>
 
 	<%@ include file="/footer.jsp"%>

@@ -16,8 +16,8 @@
 	try{ 
 		conn = DBManager.getConnection();
 		
-		String sql=" insert into fboard(fidx,fsubject,fwriter,fcontent,mbidx)"
-				   + "values(fidx_seq.nextval,?,?,?,?)";
+		String sql=" insert into fboard(fidx,fwriteday,fsubject,fwriter,fcontent,mbidx)"
+				   + "values(fidx_seq.nextval,,?,?,?,?)";
 		psmt = conn.prepareStatement(sql);
 		psmt.setString(1,fsubject);
 		psmt.setString(2,fwriter);

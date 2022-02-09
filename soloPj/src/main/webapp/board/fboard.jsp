@@ -33,6 +33,8 @@
 		
 		sql =" select * from fboard";
 		rs = psmt.executeQuery(sql);
+		
+		
  %>
 <!DOCTYPE html>
 <html>
@@ -76,7 +78,7 @@
 				%>
 					<tr>
 						 <td><%=rs.getInt("fidx")%></td>
-						<td><%=rs.getString("fsubject")%></td>
+						<td><a href="view.jsp?fidx=<%=rs.getInt("fidx")%>&searchType=<%=searchType%>&searchValue=<%=searchValue%>"><%=rs.getString("fsubject")%></a></td>
 						<td><%=rs.getString("fcontent")%></td>
 						<td><%=rs.getString("fwriter")%></td>
 						<td><%=rs.getString("fwriteday")%></td>

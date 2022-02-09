@@ -3,6 +3,7 @@
 <%@ page import="java.sql.*"%>
 <%@ page import="soloPjWeb.*"%>
 <%
+
 	Memb mlogin = (Memb)session.getAttribute("loginUser");
 	request.setCharacterEncoding("UTF-8");
 	
@@ -29,7 +30,9 @@
 		psmt = conn.prepareStatement(sql);
 		
 		rs = psmt.executeQuery();
-	
+		
+		sql =" select * from fboard";
+		rs = psmt.executeQuery(sql);
  %>
 <!DOCTYPE html>
 <html>
@@ -47,7 +50,7 @@
 		<h2>전체글</h2>
 		<article>
 			<div class="all-top">
-				<form action="all.jsp">
+				<form action="fboard.jsp">
 				<select name="searchType">
 					<option value="fsubject" <%if(searchType !=null && searchType.equals("fsubject")) out.println("selected"); %>>글제목</option>
 					<option value="fwriter" <%if(searchType !=null && searchType.equals("fwriter")) out.println("selected"); %>>작성자</option>
@@ -80,17 +83,19 @@
 						<td><%=rs.getInt("fhit")%></td> 
 						
 					</tr>
-				<% 
+					<% 
 					}
-				%>
+					%> 
+					
+				
 				</tbody>
 				
 			</table>
-			<%if(mlogin !=null){ %>
+			
 			<button onclick="location.href='insert.jsp'">등록</button>
-			<%} %>
+			
 		</article>
-		<%@ include file="../footer.jsp"%>
+		<%@ include file="/footer.jsp"%>
 	</section>
 	
 	<script src="../bootstrap/js/bootstrap.bundle.min.js"

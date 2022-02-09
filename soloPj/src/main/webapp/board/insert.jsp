@@ -6,13 +6,7 @@
 	Memb ilogin = (Memb) session.getAttribute("loginUser");
 	String userName = "";
 	
-	
-	Connection conn =null;
-	PreparedStatement psmt =null;
-	ResultSet rs=null;
-	try{
-		conn = DBManager.getConnection();
-	
+
 	
 if (ilogin != null) {
 	userName = ilogin.getMembname();
@@ -63,25 +57,10 @@ if (ilogin != null) {
 			</table>
 			<input type="submit" value="등록">
 			<input type="button" value="취소" onclick="location.href='fboard.jsp'">
-			
+
 		</form>
 	</section>
 
 	<%@ include file="/footer.jsp"%>
 </body>
 </html>
-<%
-	}catch(Exception e){
-		e.printStackTrace();
-	}finally{
-		if(conn != null){
-			conn.close();
-		}
-		if(psmt != null){
-			psmt.close();
-		}
-		if(rs != null){
-			rs.close();
-		}
-	}
-%>

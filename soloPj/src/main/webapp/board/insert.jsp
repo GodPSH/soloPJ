@@ -33,7 +33,7 @@ if (ilogin != null) {
 					<tr>
 						<th class="tabth">작성자</th>
 						<th class="tabth" ><input name="fwriter" value="<%=userName%>"></th>
-						<th class="tabth">등록일</th>
+						<th class="tabth" >등록일</th>
 						<th class="tabth"></th>
 						<th class="tabth">조회수</th>
 						<th class="tabth"></th>

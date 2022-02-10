@@ -137,8 +137,12 @@
 				<!-- 페이지 1보다크면 이전으로 -->
 				<% if(paging.getStartPage() > 1){
 			%>	
-				
-				<a href="fboard.jsp?nowPage=<%=paging.getStartPage()%>&searchType=<%=searchType%>&searchValue=<%=searchValue%>">&lt;</a>		
+				<ul>
+				<li>
+					<a href="fboard.jsp?nowPage=<%=paging.getStartPage()%>&searchType=<%=searchType%>&searchValue=<%=searchValue%>">&lt;</a>
+					
+				</li>
+				</ul>		
 			<%	
 			}
 			// 현재페이지와 
@@ -146,13 +150,15 @@
 				//현재페이지와 i같으면 볼드
 				if(i == paging.getNowPage()){
 			%>
-				
-				<b><%= i %></b>
-				
+					
+						
+							<b><%= i %></b>
+							
+					
 			<%//현재페이지와 i같지않으면
 				}else{
 			%>		
-					<a  href="fboard.jsp?nowPage=<%=i%>&searchType=<%=searchType%>&searchValue=<%=searchValue%>"><%=i %></a>
+					<a href="fboard.jsp?nowPage=<%=i%>&searchType=<%=searchType%>&searchValue=<%=searchValue%>"><%=i %></a>
 							
 			<% 
 				}

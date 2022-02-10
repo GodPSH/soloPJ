@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*"%>
 <%@ page import="soloPjWeb.*"%>
+<%@ page import="java.util.*"%>
+
 <%
 Memb mlogin = (Memb) session.getAttribute("loginUser");
 request.setCharacterEncoding("UTF-8");
@@ -26,6 +28,8 @@ int fhit_ = 0;
 int fidx_ = 0;
 int mbidx_ = 0;
 
+
+ArrayList<Reply> rList = new ArrayList<>();
 try {
 	conn = DBManager.getConnection();
 	String sql = " select * from fboard where fidx =" + fidx;
@@ -42,15 +46,35 @@ try {
 		mbidx_ = rs.getInt("mbidx");
 	}
 	
+	
+	
+	sql = " select * from freply r, memb m"
+			 +" where r.mbidx = m.mbidx"
+			 +" and r.fidx ="+fidx;
+	psmtReply = conn.prepareStatement(sql);
+	
+	rsReply = psmtReply.executeQuery();
+	
+	while(rsReply.next()){
+		Reply reply = new Reply();
+		reply.setFidx(rsReply.getInt("fidx"));
+		reply.setMbidx(rsReply.getInt("mbidx"));
+		reply.setFridx(rsReply.getInt("fridx"));
+		reply.setFrcontent(rsReply.getString("frcontent"));
+		reply.setRdate(rsReply.getString("rdate"));
+		reply.setMembname(rsReply.getString("membname"));
+		
+		rList.add(reply);
+	}
+	
 } catch (Exception e) {
 	e.printStackTrace();
 } finally {
-	if (conn != null)
-		conn.close();
-	if (psmt != null)
-		psmt.close();
-	if (rs != null)
-		rs.close();
+	if(conn != null) conn.close();
+	if(psmt != null) psmt.close();
+	if(rs != null) rs.close();
+	if(psmtReply != null)psmtReply.close();
+	if(rsReply != null) rsReply.close();
 }
 %>
 <!DOCTYPE html>
@@ -58,11 +82,49 @@ try {
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="<%=request.getContextPath()%>/js/jquery-3.6.0.min.js"></script>
 <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet"
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
 <link href="<%=request.getContextPath()%>/css/all2.css" rel="stylesheet">
 </head>
+<script>
+var mbidx = 0;
+
+<%
+	if(mlogin != null){
+%>
+	mbidx = <%=mlogin.getMbidx()%>
+<%
+	}
+%>
+function saveRe(){
+	$.ajax({
+		url : "replyInsert.jsp",
+		type:"post",
+		data : $("form[name='reply']").serialize(),
+		success:function(data){
+			var json =JSON.parse(data.trim());
+			var html = "<tr>"
+				html += "<td>"+json[0].membname+"<input type='hidden' name='fridx' value='"+json[0].fridx+"'></td>";
+				html += "<td>"+json[0].frcontent+"</td>";
+				html += "<td>"
+					if(mbidx == json[0].mbidx){
+						html += "<input type='button' value='수정' onclick='modify(this)'>";
+						html += "<input type='button' value='삭제' onclick='deleteReply(this)'>";	
+					}
+					
+					html += "</td>";
+					html += "</tr>";
+					
+					$("#replayTable>tbody").append(html);
+					
+					document.reply.reset();
+		}
+	});
+}
+</script>
+
 <body>
 	<%@ include file="/header.jsp"%>
 	<%@ include file="/side.jsp"%>
@@ -92,21 +154,60 @@ try {
 					</tr>
 				</tbody>
 			</table>
-			<button onclick="location.href='fboard.jsp?searchType=<%=searchType%>&searchValue=<%=searchValue%>'">목록</button>
-			<% if(mlogin!=null &&mlogin.getMbidx()==mbidx_){ %>
-			<button onclick="location.href='modif.jsp?fidx=<%=fidx_%>&searchType=<%=searchType%>&searchValue=<%=searchValue%>'">수정</button>
+			<button
+				onclick="location.href='fboard.jsp?searchType=<%=searchType%>&searchValue=<%=searchValue%>'">목록</button>
+			<%
+			if (mlogin != null && mlogin.getMbidx() == mbidx_) {
+			%>
+			<button
+				onclick="location.href='modif.jsp?fidx=<%=fidx_%>&searchType=<%=searchType%>&searchValue=<%=searchValue%>'">수정</button>
 			<button onclick="deleteFn()">삭제</button>
-			
+
 			<%
 			}
 			%>
 			<form name="frm" action="deleteOk.jsp" method="post">
 				<input type="hidden" name="fidx" value="<%=fidx_%>">
 			</form>
-			<div>
-				div
 			
+			<div class="card bg-light" >
+				<div class="card-body">					
+					<form class="mb-4" name="reply">
+					<div>
+						<textarea class="form-control" rows="3"
+							placeholder="작성해주세요" name="frcontent"></textarea>
+						
+							<input type="button" value="저장" onclick="saveRe()">
+						</div>	
+						
+					</form>							
+				</div>
 			</div>
+			
+			
+			<div class="replyList">
+					<table>
+						<tbody>
+					<%for(Reply r : rList){ %>
+							<tr>
+								<td>작성자</td>
+								<td><%=r.getMembname()%>: <input type="hidden" name="fridx" value="<%=r.getFridx()%>"></td>
+								<td><%=r.getFrcontent()%></td>
+								
+								<td>
+								<%if(login != null && (login.getMbidx() == r.getMbidx())){ %>
+									<input type="button" value="수정"  onclick='modify(this)'>
+									<input type="button" value="삭제" onclick=''>
+								<%} %>
+								</td>
+								
+							</tr>
+							
+					<%} %>
+						</tbody>
+					</table>
+			
+				</div>
 		</article>
 	</section>
 	<%@ include file="/footer.jsp"%>
@@ -116,16 +217,16 @@ try {
 		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 		crossorigin="anonymous"></script>
 	<script>
-	function deleteFn(){
-		if(confirm("정말 삭제하시겠습니까?")==true){
-			alert("삭제되었습니다.");
-			document.frm.submit();
-		}else{
-			alert("취소되었습니다");
-			return false;
+		function deleteFn() {
+			if (confirm("정말 삭제하시겠습니까?") == true) {
+				alert("삭제되었습니다.");
+				document.frm.submit();
+			} else {
+				alert("취소되었습니다");
+				return false;
+			}
+
 		}
-		
-	}
 	</script>
 </body>
 </html>

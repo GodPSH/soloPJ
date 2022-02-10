@@ -2,11 +2,12 @@
 
 header{
 	position:absolute;
-	height: 150px;
+	height: 15%;
 	width:100%;
 	padding: 0px;
 	margin: 0px;
-	background: #F03861;	
+	background: radial-gradient(#ff0844 0%, #ffb199 100%) fixed;
+		
 }
 .head{
 	margin:0px;
@@ -18,8 +19,8 @@ header{
 .headimg{
 	position: absolute;
 	background-position: center;
-	width: 150px;
-	height: 150px;
+	width: 8%;
+	height: 100%;
 }
 
 

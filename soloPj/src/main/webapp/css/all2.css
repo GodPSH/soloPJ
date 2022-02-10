@@ -13,8 +13,8 @@ table{
 	border:1px solid gray;
 	width:30%;
 	margin-top:3%;
-	max-width:70%;
-	height: 50%;
+	max-width:60%;
+	height: 30%;
 }
 .td{
 	margin: 0px;
@@ -38,5 +38,12 @@ textarea {
 	width: 100%;
 }
 .textarea{
-	height: 500px;
+	height: 300px;
+}
+textarea.form-control{
+	width: 90%;	
+}
+.card.bg-light {
+    width: 600px;
+    margin-top: 10px;
 }

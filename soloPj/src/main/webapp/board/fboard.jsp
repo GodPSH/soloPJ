@@ -10,14 +10,24 @@
 	String searchValue = request.getParameter("searchValue");
 	String searchType = request.getParameter("searchType");
 	
+	
+	String nowPage =request.getParameter("nowPage");
+	int nowPageI =1;
+	if(nowPage != null){
+		nowPageI = Integer.parseInt(nowPage);
+	}
+	
+	
+	
 	Connection conn =null;
 	PreparedStatement psmt =null;
 	ResultSet rs=null;
-	
+	PagingUtil paging =null;
 	
 	try{ 
 		conn = DBManager.getConnection();
 		String sql = "";
+		
 		sql = " select count(*) as total from fboard ";
 		if(searchValue != null && !searchValue.equals("") && !searchValue.equals("null")){
 			if(searchType.equals("fsubject")){
@@ -31,8 +41,36 @@
 		
 		rs = psmt.executeQuery();
 		
-		sql =" select * from fboard";
-		rs = psmt.executeQuery(sql);
+		int total = 0;
+		
+		if(rs.next()){
+			total = rs.getInt("total");
+		}
+		
+		paging = new PagingUtil(total,nowPageI,5); // 페이지 5개씩화면에 보이기
+		int num = total-(5*(nowPageI-1));
+		
+		sql =" select * from ";
+		sql += " (select rownum r, b.* from"; 
+		sql += " (select * from fboard";
+		
+		if(searchValue != null && !searchValue.equals("") && !searchValue.equals("null")){
+			if(searchType.equals("fsubject")){
+				sql += " where fsubject like '%"+searchValue+"%'";
+			}else if(searchType.equals("fwriter")){
+				sql += " where fwriter = '"+searchValue+"'";
+			}
+			
+		}
+		
+		
+		sql += " order by fidx desc ) b)";
+		//시작과 끝범위
+		sql += " where r >= "+paging.getStart()+" and r <= "+paging.getEnd();
+		
+		psmt = conn.prepareStatement(sql);
+		
+		rs = psmt.executeQuery();
 		
 		
  %>
@@ -77,7 +115,7 @@
 					while(rs.next()){
 				%>
 					<tr>
-						 <td><%=rs.getInt("fidx")%></td>
+						 <td><%=num%></td>
 						<td><a href="view.jsp?fidx=<%=rs.getInt("fidx")%>&searchType=<%=searchType%>&searchValue=<%=searchValue%>"><%=rs.getString("fsubject")%></a></td>
 						<td><%=rs.getString("fcontent")%></td>
 						<td><%=rs.getString("fwriter")%></td>
@@ -86,6 +124,7 @@
 						
 					</tr>
 					<% 
+					num--;
 					}
 					%> 
 					
@@ -93,7 +132,41 @@
 				</tbody>
 				
 			</table>
-			
+			<div id="pagingArea">
+				
+				<!-- 페이지 1보다크면 이전으로 -->
+				<% if(paging.getStartPage() > 1){
+			%>	
+				
+				<a href="fboard.jsp?nowPage=<%=paging.getStartPage()%>&searchType=<%=searchType%>&searchValue=<%=searchValue%>">&lt;</a>		
+			<%	
+			}
+			// 현재페이지와 
+			for(int i= paging.getStartPage(); i<=paging.getEndPage(); i++){
+				//현재페이지와 i같으면 볼드
+				if(i == paging.getNowPage()){
+			%>
+				
+				<b><%= i %></b>
+				
+			<%//현재페이지와 i같지않으면
+				}else{
+			%>		
+					<a  href="fboard.jsp?nowPage=<%=i%>&searchType=<%=searchType%>&searchValue=<%=searchValue%>"><%=i %></a>
+							
+			<% 
+				}
+			}
+			// 엔드페이지가 라스트페이지가 같지않으면 
+			if(paging.getEndPage() != paging.getLastPage()){
+			%>	
+				<a href="fboard.jsp?nowPage=<%=paging.getEndPage()+1%>&searchType=<%=searchType%>&searchValue=<%=searchValue%>">&gt;</a>
+					
+			<%	
+			}
+			%>	
+				
+			</div>
 			<button onclick="location.href='insert.jsp'">등록</button>
 			
 		</article>

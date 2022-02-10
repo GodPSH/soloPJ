@@ -12,6 +12,7 @@ public class PagingUtil {
 	private int end; // 쿼리에서 사용할 화면당 글 종료번호
 	private int cntPage=10; //화면에서 보여질 페이징 갯수
 	
+
 	public PagingUtil() {
 		
 	}

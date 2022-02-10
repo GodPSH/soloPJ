@@ -31,6 +31,8 @@ if (ilogin != null) {
 			<table border="1" class="table table-bordered">
 				<thead>
 					<tr>
+						<th class="tabth">글번호</th>
+						<th class="tabth2"></th>
 						<th class="tabth">작성자</th>
 						<th class="tabth" ><input name="fwriter" value="<%=userName%>"></th>
 						<th class="tabth" >등록일</th>
@@ -42,10 +44,10 @@ if (ilogin != null) {
 				<tbody>
 					<tr>
 						<th>제목</th>
-						<td colspan="5"><input type="text" name="fsubject" class="tbin"></td>
+						<td colspan="7"><input type="text" name="fsubject" class="tbin"></td>
 					</tr>
 					<tr class="textarea">
-						<td colspan="6" rowspan="3" class="trtd">
+						<td colspan="8" rowspan="3" class="trtd">
 							<textarea name="fcontent" rows="3"></textarea>
 						</td>
 					</tr>

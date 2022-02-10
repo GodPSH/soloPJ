@@ -16,10 +16,12 @@ ResultSet rs = null;
 try {
 	conn = DBManager.getConnection();
 
-	String sql =  " update fboard set"
-			+ " fsubject='"+fsubject+"'"
-			+ ",fcontent = '"+fcontent+"'"
-			+ "where fidx="+fidx;
+
+	String sql = " update fboard set "
+			   + " fsubject= '"+fsubject+"' "
+			   + ",fcontent = '"+fcontent+"' "
+			   + "where fidx="+fidx;
+	
 	psmt = conn.prepareStatement(sql);
 	int result = psmt.executeUpdate();
 	
@@ -34,11 +36,7 @@ try {
 } catch (Exception e) {
 	e.printStackTrace();
 } finally {
-	if (conn != null)
-		conn.close();
-	if (psmt != null)
-		psmt.close();
-	if (rs != null)
-		rs.close();
+	if(conn != null) conn.close();
+	if(psmt != null) psmt.close();
 }
 %>

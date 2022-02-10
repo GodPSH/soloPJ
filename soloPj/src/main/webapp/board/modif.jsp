@@ -25,7 +25,7 @@ int fidx_ = 0;
 try {
 	conn = DBManager.getConnection();
 
-	String sql = " select * from fboard where fidx=" + fidx;
+	String sql = " select * from fboard where fidx= " + fidx;
 	psmt = conn.prepareStatement(sql);
 	rs = psmt.executeQuery();
 
@@ -33,6 +33,7 @@ try {
 		fsubject_ = rs.getString("fsubject");
 		fwriter_ = rs.getString("fwriter");
 		fcontent_ = rs.getString("fcontent");
+		fwriteday_=rs.getString("fwriteday");
 		fidx_ = rs.getInt("fidx");
 	}
 
@@ -64,9 +65,12 @@ try {
 	<section>
 		<article>
 			<form action="modifOk.jsp" method="post">
+			<input type="hidden" name="fidx" value="<%=fidx_%>">
 				<table border="1" class="table table-bordered">
 					<thead>
 						<tr>
+							<th class="tabth">글번호</th>
+							<th class="tabth2"><%=fidx_%></th>
 							<th class="tabth">작성자</th>
 							<th class="tabth2"><%=fwriter_%></th>
 							<th class="tabth">등록일</th>
@@ -78,19 +82,19 @@ try {
 					<tbody>
 						<tr>
 							<th class="tabth">제목</th>
-							<td colspan="5" class="tabth2"><%=fsubject_%></td>
+							<td colspan="7" class="tabth2"><input type="text" size="50" name="fsubject" value="<%=fsubject_%>"></td>
 						</tr>
 						<tr class="textarea">
-							<td colspan="6" rowspan="3" class="trtd"><textarea name="fcontent" rows="3"><%=fcontent_%></textarea></td>
+							<td colspan="8" rowspan="3" class="trtd"><textarea name="fcontent" rows="3"><%=fcontent_%></textarea></td>
 						</tr>
 					</tbody>
 				</table>
-				<button onclick="">저장</button>
+				<input type="submit" value="저장">
 				<button type="button"
 					onclick="location.href='view.jsp?fidx=<%=fidx%>&searchType=<%=searchType%>&searchValue=<%=searchValue%>'">취소</button>
-				
 			</form>
 		</article>
 	</section>
+	<%@ include file="/footer.jsp"%>
 </body>
 </html>

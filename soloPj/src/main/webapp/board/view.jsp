@@ -72,6 +72,8 @@ try {
 			<table border="1" class="table table-bordered">
 				<thead>
 					<tr>
+						<th class="tabth">글번호</th>
+						<th class="tabth2"><%=fidx_%></th>
 						<th class="tabth">작성자</th>
 						<th class="tabth2"><%=fwriter_%></th>
 						<th class="tabth">등록일</th>
@@ -83,10 +85,10 @@ try {
 				<tbody>
 					<tr>
 						<th class="tabth">제목</th>
-						<td colspan="5" class="tabth2"><%=fsubject_%></td>
+						<td colspan="7" class="tabth2"><%=fsubject_%></td>
 					</tr>
 					<tr class="textarea">
-						<td colspan="6" rowspan="3" class="trtd"><%=fcontent_%></td>
+						<td colspan="8" rowspan="3" class="trtd"><%=fcontent_%></td>
 					</tr>
 				</tbody>
 			</table>
@@ -98,8 +100,13 @@ try {
 			<%
 			}
 			%>
-
-
+			<form name="frm" action="deleteOk.jsp" method="post">
+				<input type="hidden" name="fidx" value="<%=fidx_%>">
+			</form>
+			<div>
+				div
+			
+			</div>
 		</article>
 	</section>
 	<%@ include file="/footer.jsp"%>
@@ -108,5 +115,17 @@ try {
 	<script src="../bootstrap/js/bootstrap.bundle.min.js"
 		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
 		crossorigin="anonymous"></script>
+	<script>
+	function deleteFn(){
+		if(confirm("정말 삭제하시겠습니까?")==true){
+			alert("삭제되었습니다.");
+			document.frm.submit();
+		}else{
+			alert("취소되었습니다");
+			return false;
+		}
+		
+	}
+	</script>
 </body>
 </html>

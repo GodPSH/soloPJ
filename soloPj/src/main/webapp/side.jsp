@@ -10,12 +10,12 @@
 <aside>
 <div id="sidebar-left1">
 	<ul class="side">
-		<li><a>전체글</a></li>
-		<li><a>공지사항</a></li>
-		<li><a>팀소개</a></li>
-		<li><a>하이라이트/해외축구</a></li>
-		<li><a>관리자</a></li>
-		<li><a>회원관리</a></li>
+		<li><a href="<%=request.getContextPath()%>/board/fboard.jsp">전체글</a></li>
+		<li><a href="#">공지사항</h3></li>
+		<li><a href="#">팀소개</a></li>
+		<li><a href="#">하이라이트/해외축구</a></li>
+		<li><a href="#">관리자</a></li>
+		<li><a href="#">회원관리</a></li>
 	</ul>
 </div>
 <div id="sidebar-left2">

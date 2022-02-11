@@ -82,11 +82,11 @@ try {
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="<%=request.getContextPath()%>/js/jquery-3.6.0.min.js"></script>
 <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet"
 	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
 	crossorigin="anonymous">
 <link href="<%=request.getContextPath()%>/css/all2.css" rel="stylesheet">
+<script src="<%=request.getContextPath()%>/js/jquery-3.6.0.min.js"></script>
 </head>
 <script>
 var mbidx = 0;
@@ -98,7 +98,7 @@ var mbidx = 0;
 <%
 	}
 %>
-function saveRe(){
+/* function saveRe(){
 	$.ajax({
 		url : "replyInsert.jsp",
 		type:"post",
@@ -116,6 +116,31 @@ function saveRe(){
 					
 					html += "</td>";
 					html += "</tr>";
+					
+					$("#replayTable>tbody").append(html);
+					
+					document.reply.reset();
+		}
+	}); */
+}
+function saveRe(){
+	$.ajax({
+		url : "replyInsert.jsp",
+		type:"post",
+		data : $("form[name='reply']").serialize(),
+		success:function(data){
+			var json =JSON.parse(data.trim());
+			var html = "<div>"
+				html += "<div>"+json[0].membname+"<input type='hidden' name='fridx' value='"+json[0].fridx+"'></div>";
+				html += "<td>"+json[0].frcontent+"</div>";
+				html += "<div>"
+					if(mbidx == json[0].mbidx){
+						html += "<input type='button' value='수정' onclick='modify(this)'>";
+						html += "<input type='button' value='삭제' onclick='deleteReply(this)'>";	
+					}
+					
+					html += "</div>";
+					html += "</div>";
 					
 					$("#replayTable>tbody").append(html);
 					
@@ -169,45 +194,46 @@ function saveRe(){
 			<form name="frm" action="deleteOk.jsp" method="post">
 				<input type="hidden" name="fidx" value="<%=fidx_%>">
 			</form>
-			
+						
+				<div class="replyList">
+				<form class="mb-4" name="reply">
+					<div class="rediv">
+					
+					<%for(Reply r : rList){ %>
+							
+					
+								<div class="rediv-1">작성자</div>
+								<div class="rediv-2"><%=r.getMembname()%>: <input type="hidden" name="fridx" value="<%=r.getFridx()%>"></div>
+								<div class="rediv-2"><%=r.getFrcontent()%></div>
+								
+								
+								<%if(login != null && (login.getMbidx() == r.getMbidx())){ %>
+									<div class="rediv-2"><input type="button" value="수정"  onclick='modify(this)'></div>
+									<div class="rediv-2"><input type="button" value="삭제" onclick=''></div>
+								<%} %>
+								
+								
+							
+							
+					<%} %>
+					</div>
+					</form>
+				</div>
 			<div class="card bg-light" >
-				<div class="card-body">					
+				<div class="card-body" >					
 					<form class="mb-4" name="reply">
-					<div>
+					<input type="hidden" name="fidx" value="<%=fidx_ %>">
+					<div class="rewrite">
 						<textarea class="form-control" rows="3"
 							placeholder="작성해주세요" name="frcontent"></textarea>
 						
-							<input type="button" value="저장" onclick="saveRe()">
+							<input type="button" value="저장" onclick="saveRe()" class="writesave">
 						</div>	
-						
-					</form>							
+						</form>
+												
 				</div>
 			</div>
-			
-			
-			<div class="replyList">
-					<table>
-						<tbody>
-					<%for(Reply r : rList){ %>
-							<tr>
-								<td>작성자</td>
-								<td><%=r.getMembname()%>: <input type="hidden" name="fridx" value="<%=r.getFridx()%>"></td>
-								<td><%=r.getFrcontent()%></td>
-								
-								<td>
-								<%if(login != null && (login.getMbidx() == r.getMbidx())){ %>
-									<input type="button" value="수정"  onclick='modify(this)'>
-									<input type="button" value="삭제" onclick=''>
-								<%} %>
-								</td>
-								
-							</tr>
-							
-					<%} %>
-						</tbody>
-					</table>
-			
-				</div>
+
 		</article>
 	</section>
 	<%@ include file="/footer.jsp"%>

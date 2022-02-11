@@ -19,9 +19,8 @@
 	String fridx =  request.getParameter("fridx");
 	String frcontent =  request.getParameter("frcontent");
 	//String fidx2 = request.getParameter("fidx");
-	int fidx=Integer.parseInt(request.getParameter("fidx"));
 	//int fidx=Integer.parseInt(fidx2);
-	
+	int fidx=Integer.parseInt(request.getParameter("fidx"));
 	int mbidx = login.getMbidx();
 	
 	String rdate =  request.getParameter("rdate");
@@ -35,16 +34,15 @@
 	try{
 		conn = DBManager.getConnection();
 		
-		String sql = " insert into freply(fridx,frcontent,fidx,mbidx,)"
+		String sql = " insert into freply(fridx,frcontent,fidx,mbidx)"
 					+" values(fridx_seq.nextval,?,?,?)";
-		psmt = conn.prepareStatement(sql);
-		
+		psmt = conn.prepareStatement(sql);	
 		psmt.setString(1,frcontent);
 		psmt.setInt(2,fidx);
 		psmt.setInt(3,mbidx);
 		
 		psmt.executeUpdate();
-		
+		//sql = " select * from freply where fridx= (select max(fridx) from freply)";
 		sql = "select * from freply r, memb m where r.mbidx = m.mbidx and r.fridx = (select max(fridx) from freply)";
 		psmt =conn.prepareStatement(sql);
 		

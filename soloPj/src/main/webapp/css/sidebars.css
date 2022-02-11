@@ -16,3 +16,17 @@
       margin-top:20%;
        border:1px solid #F03861;
       }
+      .side a{
+	 background: linear-gradient(to right top, #861657, #ffa69e);
+    color: transparent;
+   	-webkit-background-clip: text; 
+	font-family: "돋움체";
+	font-size: 16px;
+}
+.side li{
+	 background: linear-gradient(to right top, #861657, #ffa69e);
+    color: transparent;
+   	-webkit-background-clip: text; 
+	font-family: "돋움체";
+	font-size: 18px;
+}

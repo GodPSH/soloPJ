@@ -10,6 +10,28 @@
 </head>
 <section>
 	
+  
+
+  <div class="slider">  
+
+    <ul class="js__slider__images slider__images">
+      <li class="slider__images-item"><img class="slider__images-image" src="<%=request.getContextPath()%>/img/team.png" /></li>
+      <li class="slider__images-item"><img class="slider__images-image" src="<%=request.getContextPath()%>/img/head.png" /></li>
+     
+    </ul>
+
+    <div class="sliders">
+      <span class="slider__control js__slider__control--prev slider__control--prev">Prev</span>
+      
+      <ol class="js__slider__pagers slider__pagers"></ol>
+      
+      <span class="slider__control js__slider__control--next slider__control--next">Next</span>
+    </div>
+  </div>
+  
+ 
+
+
 </section>
 
 </html>

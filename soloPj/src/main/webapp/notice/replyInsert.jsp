@@ -13,16 +13,15 @@
 	Memb login = (Memb)session.getAttribute("loginUser");
 	
 
-
 	
-	String fridx =  request.getParameter("fridx");
-	String frcontent =  request.getParameter("frcontent");
+	String nridx =  request.getParameter("nridx");
+	String nrcontent =  request.getParameter("nrcontent");
 	//String fidx2 = request.getParameter("fidx");
 	//int fidx=Integer.parseInt(fidx2);
-	int fidx=Integer.parseInt(request.getParameter("fidx"));
+	int nidx=Integer.parseInt(request.getParameter("nidx"));
 	int mbidx = login.getMbidx();
 	
-	String rdate =  request.getParameter("rdate");
+	String ndate =  request.getParameter("ndate");
 	
 	Connection conn = null;
 	PreparedStatement psmt = null;
@@ -33,32 +32,32 @@
 	try{
 		conn = DBManager.getConnection();
 		
-		String sql = " insert into freply(fridx,frcontent,fidx,mbidx)"
-					+" values(fridx_seq.nextval,?,?,?)";
+		String sql = " insert into nreply(nridx,nrcontent,nidx,mbidx)"
+					+" values(nridx_seq.nextval,?,?,?)";
 		psmt = conn.prepareStatement(sql);	
-		psmt.setString(1,frcontent);
-		psmt.setInt(2,fidx);
+		psmt.setString(1,nrcontent);
+		psmt.setInt(2,nidx);
 		psmt.setInt(3,mbidx);
 		
 		psmt.executeUpdate();
 		//sql = " select * from freply where fridx= (select max(fridx) from freply)";
-		sql = "select * from freply r, memb m where r.mbidx = m.mbidx and r.fridx = (select max(fridx) from freply)";
+		sql = "select * from nreply r, memb m where r.mbidx = m.mbidx and r.nridx = (select max(nridx) from nreply)";
 		psmt =conn.prepareStatement(sql);
 		
 		rs=psmt.executeQuery();
 		
-		JSONArray list = new JSONArray();
+		JSONArray lists = new JSONArray();
 		if(rs.next()){
 			JSONObject obj = new JSONObject();
-			obj.put("fidx",rs.getInt("fidx"));
+			obj.put("nidx",rs.getInt("nidx"));
 			obj.put("mbidx",rs.getInt("mbidx"));
-			obj.put("fridx",rs.getInt("fridx"));
-			obj.put("frcontent",rs.getString("frcontent"));
+			obj.put("nridx",rs.getInt("nridx"));
+			obj.put("nrcontent",rs.getString("nrcontent"));
 			obj.put("membname",rs.getString("membname"));
 			
-			list.add(obj);
+			lists.add(obj);
 		}
-		out.print(list.toJSONString());
+		out.print(lists.toJSONString());
 	}catch(Exception e){
 		e.printStackTrace();
 	}finally{

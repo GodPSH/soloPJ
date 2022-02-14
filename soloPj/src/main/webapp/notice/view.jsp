@@ -8,7 +8,8 @@
 int visitSwitch = 0;
 String cookiesql = "";   // 쿠키관련 쿼리문
 
-String cookieName = "";
+String cookieName = "";   // 쿠키이름
+
 
 Memb mlogin = (Memb) session.getAttribute("loginUser");
 request.setCharacterEncoding("UTF-8");
@@ -16,31 +17,32 @@ request.setCharacterEncoding("UTF-8");
 String searchType = request.getParameter("searchType");
 String searchValue = request.getParameter("searchValue");
 
-String fidx = request.getParameter("fidx");
+String nidx = request.getParameter("nidx");
 
 Connection conn = null;
 PreparedStatement psmt = null;
 ResultSet rs = null;
 
-PreparedStatement psmtReply = null;
-ResultSet rsReply = null;
+PreparedStatement psmtNreply = null;
+ResultSet rsNreply = null;
 
-String fsubject_ = "";
-String fwriter_ = "";
-String fcontent_ = "";
-String fwriteday_ = "";
-int fhit_ = 0;
-int fidx_ = 0;
+String nsubject_ = "";
+String nwriter_ = "";
+String ncontent_ = "";
+String nwriteday_ = "";
+int nhit_ = 0;
+int nidx_ = 0;
 int mbidx_ = 0;
 
 
-ArrayList<Reply> rList = new ArrayList<>();
+ArrayList<Nreply> reList = new ArrayList<>();
 
 if(mlogin != null){   // 조건문 안걸면 오류뜸
-    cookieName = fidx + "-" +  mlogin.getMbidx();   // 게시판번호(lidx) - 게시글번호 - 회원번호(midx)로 쿠키이름만 생성
+    cookieName = nidx + "-" +  mlogin.getMbidx();   // 게시판번호(lidx) - 게시글번호 - 회원번호(midx)로 쿠키이름만 생성
  }
 try {
 	conn = DBManager.getConnection();
+	
 	/* 조회수 */
 	 Cookie[] cookies = request.getCookies();
 	 if(mlogin != null){
@@ -54,50 +56,52 @@ try {
 		  }
 	 
 	 if(visitSwitch == 0){   // 조회한 이력이 없을 경우
-		 cookiesql = " update fboard SET fhit = fhit + 1 WHERE fidx = " + fidx;   // 조회수 1 올려줌
-       psmt = conn.prepareStatement(cookiesql);
-       int result = psmt.executeUpdate();
-       if(result == 1){
-          Cookie cookie = new Cookie(cookieName, "viewed");   // 쿠키 이름과 그에대한 값("viewed")을 생성
-          cookie.setMaxAge(60 * 60 * 24);   // 24시간으로 설정
-          response.addCookie(cookie);      // 생성한걸 쿠키객체에 집어 넣음
-       }
-    }
-    
+		 cookiesql = "UPDATE notice SET nhit = nhit + 1 WHERE nidx = " + nidx;   // 조회수 1 올려줌
+        psmt = conn.prepareStatement(cookiesql);
+        int result = psmt.executeUpdate();
+        if(result == 1){
+           Cookie cookie = new Cookie(cookieName, "viewed");   // 쿠키 이름과 그에대한 값("viewed")을 생성
+           cookie.setMaxAge(60 * 60 * 24);   // 24시간으로 설정
+           response.addCookie(cookie);      // 생성한걸 쿠키객체에 집어 넣음
+        }
+     }
+     
 	 }
-	String sql = " select * from fboard where fidx =" + fidx;
+	
+	
+	String sql = " select * from notice where nidx =" + nidx;
 	psmt = conn.prepareStatement(sql);
 	rs = psmt.executeQuery();
 
 	if (rs.next()) {
-		fsubject_ = rs.getString("fsubject");
-		fwriter_ = rs.getString("fwriter");
-		fwriteday_ = rs.getString("fwriteday");
-		fcontent_ = rs.getString("fcontent");
-		fidx_ = rs.getInt("fidx");
-		fhit_ = rs.getInt("fhit");
+		nsubject_ = rs.getString("nsubject");
+		nwriter_ = rs.getString("nwriter");
+		nwriteday_ = rs.getString("nwriteday");
+		ncontent_ = rs.getString("ncontent");
+		nidx_ = rs.getInt("nidx");
+		nhit_ = rs.getInt("nhit");
 		mbidx_ = rs.getInt("mbidx");
 	}
 	
 	
 	
-	sql = " select * from freply r, memb m"
+	sql = " select * from nreply r, memb m"
 			 +" where r.mbidx = m.mbidx"
-			 +" and r.fidx ="+fidx;
-	psmtReply = conn.prepareStatement(sql);
+			 +" and r.nidx ="+nidx;
+	psmtNreply = conn.prepareStatement(sql);
 	
-	rsReply = psmtReply.executeQuery();
+	rsNreply = psmtNreply.executeQuery();
 	
-	while(rsReply.next()){
-		Reply reply = new Reply();
-		reply.setFidx(rsReply.getInt("fidx"));
-		reply.setMbidx(rsReply.getInt("mbidx"));
-		reply.setFridx(rsReply.getInt("fridx"));
-		reply.setFrcontent(rsReply.getString("frcontent"));
-		reply.setRdate(rsReply.getString("rdate"));
-		reply.setMembname(rsReply.getString("membname"));
+	while(rsNreply.next()){
+		Nreply nreply = new Nreply();
+		nreply.setNidx(rsNreply.getInt("nidx"));
+		nreply.setMbidx(rsNreply.getInt("mbidx"));
+		nreply.setNridx(rsNreply.getInt("nridx"));
+		nreply.setNrcontent(rsNreply.getString("nrcontent"));
+		nreply.setNdate(rsNreply.getString("ndate"));
+		nreply.setMembname(rsNreply.getString("membname"));
 		
-		rList.add(reply);
+		reList.add(nreply);
 	}
 	
 } catch (Exception e) {
@@ -106,8 +110,9 @@ try {
 	if(conn != null) conn.close();
 	if(psmt != null) psmt.close();
 	if(rs != null) rs.close();
-	if(psmtReply != null)psmtReply.close();
-	if(rsReply != null) rsReply.close();
+	if(psmtNreply != null)psmtNreply.close();
+	if(rsNreply != null) rsNreply.close();
+	
 }
 %>
 <!DOCTYPE html>
@@ -135,12 +140,12 @@ function saveRe(){
 	$.ajax({
 		url : "replyInsert.jsp",
 		type:"post",
-		data : $("form[name='reply']").serialize(),
+		data : $("form[name='nreply']").serialize(),
 		success:function(data){
 			var json =JSON.parse(data.trim());
 			var html = "<tr>"
-				html += "<td>"+json[0].membname+"<input type='hidden' name='fridx' value='"+json[0].fridx+"'></td>";
-				html += "<td>"+json[0].frcontent+"</td>";
+				html += "<td>"+json[0].membname+"<input type='hidden' name='nridx' value='"+json[0].nridx+"'></td>";
+				html += "<td>"+json[0].nrcontent+"</td>";
 				html += "<td>"
 					if(mbidx == json[0].mbidx){
 						html += "<input type='button' value='수정' onclick='modify(this)'>";
@@ -158,8 +163,8 @@ function saveRe(){
 	}); 
 }
 function modify(obj){
-	var frcontent = $(obj).parent().prev().text();
-	var html = "<input type='text' name='frcontent' value='"+frcontent+"' class='remod'><input class='btn' type='hidden' name='origin' value='"+frcontent+"'>";
+	var nrcontent = $(obj).parent().prev().text();
+	var html = "<input type='text' name='nrcontent' value='"+nrcontent+"' class='remod'><input class='btn' type='hidden' name='origin' value='"+nrcontent+"'>";
 	
 	$(obj).parent().prev().html(html);
 	
@@ -180,15 +185,15 @@ function cancleReply(obj){
 }
 
 function updateReply(obj){
-	var fridx = $(obj).parent().prev().prev().find("input:hidden").val();
-	var frcontent = $(obj).parent().prev().find("input:text").val();
+	var nridx = $(obj).parent().prev().prev().find("input:hidden").val();
+	var nrcontent = $(obj).parent().prev().find("input:text").val();
 	
 	$.ajax({
 		url : "updateReply.jsp",
 		type : "post",
-		data : "fridx="+fridx+"&frcontent="+frcontent,
+		data : "nridx="+nridx+"&nrcontent="+nrcontent,
 		success : function(data){
-			$(obj).parent().prev().html(frcontent);
+			$(obj).parent().prev().html(nrcontent);
 			
 			// 만약 수정 저장 후 수정,삭제 버튼으로 복구할 때 자신이 쓴글인지 비교가 필요하면
 			// 첫 번째 셀에 midx hidden을 추가하여 사용
@@ -203,12 +208,12 @@ function deleteReply(obj){
 	var YN = confirm("정말 삭제하시겠습니까?");
 	
 	if(YN){
-		var fridx = $(obj).parent().prev().prev().find("input:hidden").val();
+		var nridx = $(obj).parent().prev().prev().find("input:hidden").val();
 		
 		$.ajax({
 			url:"deleteReply.jsp",
 			type:"post",
-			data:"fridx="+fridx,
+			data:"nridx="+nridx,
 			success: function(){
 				$(obj).parent().parent().remove();
 			}
@@ -228,54 +233,54 @@ function deleteReply(obj){
 				<thead>
 					<tr>
 						<th class="tabth">글번호</th>
-						<th class="tabth2"><%=fidx_%></th>
+						<th class="tabth2"><%=nidx_%></th>
 						<th class="tabth">작성자</th>
-						<th class="tabth2"><%=fwriter_%></th>
+						<th class="tabth2"><%=nwriter_%></th>
 						<th class="tabth">등록일</th>
-						<th class="tabth2"><%=fwriteday_%></th>
+						<th class="tabth2"><%=nwriteday_%></th>
 						<th class="tabth">조회수</th>
-						<th class="tabth2"><%=fhit_%></th>
+						<th class="tabth2"><%=nhit_%></th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<th class="tabth">제목</th>
-						<td colspan="7" class="tabth2"><%=fsubject_%></td>
+						<td colspan="7" class="tabth2"><%=nsubject_%></td>
 					</tr>
 					<tr class="textarea">
-						<td colspan="8" rowspan="3" class="trtd"><%=fcontent_%></td>
+						<td colspan="8" rowspan="3" class="trtd"><%=ncontent_%></td>
 					</tr>
 				</tbody>
 			</table>
 			<button
-				 onclick="location.href='fboard.jsp?searchType=<%=searchType%>&searchValue=<%=searchValue%>'">목록</button>
+				 onclick="location.href='notice.jsp?searchType=<%=searchType%>&searchValue=<%=searchValue%>'">목록</button>
 			<%
 			if (mlogin != null && mlogin.getMbidx() == mbidx_) {
 			%>
 			<button
-				class="btn" onclick="location.href='modif.jsp?fidx=<%=fidx_%>&searchType=<%=searchType%>&searchValue=<%=searchValue%>'">수정</button>
+				class="btn" onclick="location.href='modif.jsp?nidx=<%=nidx_%>&searchType=<%=searchType%>&searchValue=<%=searchValue%>'">수정</button>
 			<button class="btn" onclick="deleteFn()">삭제</button>
 
 			<%
 			}
 			%>
 			<form name="frm" action="deleteOk.jsp" method="post">
-				<input class="btn" type="hidden" name="fidx" value="<%=fidx_%>">
+				<input class="btn" type="hidden" name="nidx" value="<%=nidx_%>">
 			</form>
 						
 				<div class="card bg-light">
 					<div class="card-body">
 						<table class="retable">
 							<tbody>
-					<%for(Reply r : rList){ %>
+					<%for(Nreply re : reList){ %>
 								<tr>
 								
 								<td class="retbwr">작성자</td>
-								<td class="retbwr"><%=r.getMembname()%>&nbsp;: <input type="hidden" name="fridx" value="<%=r.getFridx()%>"></td>
-								<td><%=r.getFrcontent()%></td>
+								<td class="retbwr"><%=re.getMembname()%>&nbsp;: <input type="hidden" name="nridx" value="<%=re.getNridx()%>"></td>
+								<td><%=re.getNrcontent()%></td>
 								
 								<td>
-								<%if(login != null && (login.getMbidx() == r.getMbidx())){ %>
+								<%if(login != null && (login.getMbidx() == re.getMbidx())){ %>
 									<input class="btn" type="button" value="수정"  onclick='modify(this)'>
 									<input class="btn" type="button" value="삭제" onclick='deleteReply(this)'>
 								<%} %>
@@ -289,13 +294,13 @@ function deleteReply(obj){
 				</div>
 			<div class="card bg-light" >
 				<div class="card-body" >					
-					<form class="mb-4" name="reply">
-					<input class="btn" type="hidden" name="fidx" value="<%=fidx_ %>">
+					<form class="mb-4" name="nreply">
+					<input class="btn" type="hidden" name="nidx" value="<%=nidx_ %>">
 					<div class="rewrite">
 						<!-- <textarea class="form-control" rows="3"
 							placeholder="작성해주세요" name="frcontent" ></textarea> -->
 						
-						<input type="text" name="frcontent" size="60" placeholder="작성해주세요">
+						<input type="text" name="nrcontent" size="60" placeholder="작성해주세요">
 						
 							<input  class="btn" type="button" value="저장" onclick="saveRe()" class="writesave">
 						</div>	

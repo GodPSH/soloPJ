@@ -30,3 +30,7 @@
 	font-family: "돋움체";
 	font-size: 18px;
 }
+ul li {
+    padding-left: 110px;
+    float: left;
+}

@@ -10,8 +10,9 @@
 <aside>
 <div id="sidebar-left1">
 	<ul class="side">
+		<li><a href="<%=request.getContextPath()%>/main.jsp">홈</a></li>
 		<li><a href="<%=request.getContextPath()%>/board/fboard.jsp">전체글</a></li>
-		<li><a href="#">공지사항</h3></li>
+		<li><a href="<%=request.getContextPath()%>/notice/notice.jsp">공지사항</a></li>
 		<li><a href="#">팀소개</a></li>
 		<li><a href="#">하이라이트/해외축구</a></li>
 		<li><a href="#">관리자</a></li>

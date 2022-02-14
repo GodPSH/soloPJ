@@ -44,7 +44,7 @@ textarea.form-control{
 	width: 90%;	
 }
 .card.bg-light {
-    width: 600px;
+    width: 800px;
     margin-top: 10px;
 }
 .rewrite{
@@ -60,4 +60,24 @@ textarea.form-control{
 
 .rediv-2{
 	padding-left: 10px;
+}
+.retable{
+	max-width: 100%; 
+}
+.retbwr{
+	max-width:60%;
+	color: #ff0844;
+}
+.btn{
+	align-items: center;;
+	
+	height: 33px;
+	border: 0;
+	border-radius: 4px;
+	background: rgb(105, 163, 255);
+	background: linear-gradient(162deg, rgba(105, 163, 255, 1) 0%,
+		rgba(43, 125, 254, 1) 50%, rgba(43, 125, 254, 1) 100%);
+}
+.remod{
+	width: 150px;
 }

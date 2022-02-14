@@ -7,6 +7,8 @@ public class Reply {
 	private String frcontent;
 	private String rdate;
 	private String membname;
+	
+
 	public int getFridx() {
 		return fridx;
 	}

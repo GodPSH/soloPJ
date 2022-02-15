@@ -9,27 +9,39 @@
 	rel="stylesheet">
 </head>
 <section>
-	
-  
 
-  <div class="slider">  
 
-    <ul class="js__slider__images slider__images">
-      <li class="slider__images-item"><img class="slider__images-image" src="<%=request.getContextPath()%>/img/team.png" /></li>
-      <li class="slider__images-item"><img class="slider__images-image" src="<%=request.getContextPath()%>/img/head.png" /></li>
-     
-    </ul>
+	<div class="slider">
+		<input type="radio" name="slide" id="slide1" checked> <input
+			type="radio" name="slide" id="slide2"> <input type="radio"
+			name="slide" id="slide3"> <input type="radio" name="slide"
+			id="slide4">
+		<ul id="imgholder" class="imgs">
+			<li><img src="<%=request.getContextPath()%>/img/team.jpg"></li>
+			<li><img src="<%=request.getContextPath()%>/img/team2.jpg"></li>
+			<li><img src="<%=request.getContextPath()%>/img/team3.jpg"></li>
+			<li><img src="<%=request.getContextPath()%>/img/team4.jpg"></li>
 
-    <div class="sliders">
-      <span class="slider__control js__slider__control--prev slider__control--prev">Prev</span>
-      
-      <ol class="js__slider__pagers slider__pagers"></ol>
-      
-      <span class="slider__control js__slider__control--next slider__control--next">Next</span>
-    </div>
-  </div>
-  
- 
+		</ul>
+		<div class="bullets">
+			<label for="slide1">&nbsp;</label> <label for="slide2">&nbsp;</label>
+			<label for="slide3">&nbsp;</label> <label for="slide4">&nbsp;</label>
+		</div>
+		<div class="team">
+			<p>
+				팀소개글입니다.팀소개글입니다.
+				팀소개글입니다.팀소개글입니다.
+				팀소개글입니다.팀소개글입니다.
+				팀소개글입니다.팀소개글입니다.
+				팀소개글입니다.팀소개글입니다.
+				팀소개글입니다.팀소개글입니다.
+				팀소개글입니다.팀소개글입니다.
+				팀소개글입니다.팀소개글입니다.
+			</p>
+		</div>
+	</div>
+
+
 
 
 </section>

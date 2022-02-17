@@ -248,7 +248,7 @@ function deleteReply(obj){
 				</tbody>
 			</table>
 			<button
-				 onclick="location.href='fboard.jsp?searchType=<%=searchType%>&searchValue=<%=searchValue%>'">목록</button>
+				class="btn" onclick="location.href='fboard.jsp?searchType=<%=searchType%>&searchValue=<%=searchValue%>'">목록</button>
 			<%
 			if (mlogin != null && mlogin.getMbidx() == mbidx_) {
 			%>
@@ -257,8 +257,12 @@ function deleteReply(obj){
 			<button class="btn" onclick="deleteFn()">삭제</button>
 
 			<%
-			}
+			}else if(mlogin.getMbidx()==1){
 			%>
+			<button
+				class="btn" onclick="location.href='modif.jsp?fidx=<%=fidx_%>&searchType=<%=searchType%>&searchValue=<%=searchValue%>'">수정</button>
+			<button class="btn" onclick="deleteFn()">삭제</button>
+			<%} %>
 			<form name="frm" action="deleteOk.jsp" method="post">
 				<input class="btn" type="hidden" name="fidx" value="<%=fidx_%>">
 			</form>
@@ -275,7 +279,10 @@ function deleteReply(obj){
 								<td><%=r.getFrcontent()%></td>
 								
 								<td>
-								<%if(login != null && (login.getMbidx() == r.getMbidx())){ %>
+								<%if(login != null && login.getMbidx() == r.getMbidx()){ %>
+									<input class="btn" type="button" value="수정"  onclick='modify(this)'>
+									<input class="btn" type="button" value="삭제" onclick='deleteReply(this)'>
+								<%}else if(login.getMbidx()==1){ %>
 									<input class="btn" type="button" value="수정"  onclick='modify(this)'>
 									<input class="btn" type="button" value="삭제" onclick='deleteReply(this)'>
 								<%} %>

@@ -81,6 +81,20 @@
 <title>Insert title here</title>
 <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">	
 <link href="<%=request.getContextPath()%>/css/all.css" rel="stylesheet">
+<script>
+function nologin(){
+	var login = '<%=mlogin%>';
+	console.log(login);
+	console.log(typeof login);
+	//location.href ='member/list.jsp';
+	
+	if(login=='null'){
+		alert("로그인 후 접근 가능합니다.");
+	}else{
+		location.href='main.jsp';
+	}
+}
+</script>
 </head>
 <body>
 	
@@ -173,8 +187,11 @@
 			%>	
 				
 			</div>
-			<button onclick="location.href='insert.jsp'">등록</button>
-			
+			<%if(mlogin !=null){ %>
+			<button class="btn" onclick="location.href='insert.jsp'">등록</button>
+			<%}else if(mlogin==null){ %>
+			<button class="btn" onclick="nologin()">등록</button>
+			<%} %>
 		</article>
 		<%@ include file="/footer.jsp"%>
 	</section>

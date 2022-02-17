@@ -48,7 +48,7 @@
         <li><a href="<%=request.getContextPath()%>/board/fboard.jsp" class="nav-link px-2 link-dark">전체 글</a></li>
         <li><a href="<%=request.getContextPath()%>/notice/notice.jsp" class="nav-link px-2 link-dark">공지사항</a></li>
         <li><a href="<%=request.getContextPath()%>/teamboard/teamboard.jsp" class="nav-link px-2 link-dark">팀 소개</a></li>
-        <li><a href="javascript:goMember();" class="nav-link px-2 link-dark">하이라이트 / 해외축구</a></li>
+        <li><a href="<%=request.getContextPath()%>/hiboard/hiboard.jsp" class="nav-link px-2 link-dark">하이라이트 / 해외축구</a></li>
       </ul>
       <%}else{ %>
       <ul>

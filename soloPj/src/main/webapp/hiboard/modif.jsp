@@ -9,32 +9,32 @@ request.setCharacterEncoding("UTF-8");
 String searchType = request.getParameter("searchType");
 String searchValue = request.getParameter("searchValue");
 
-String tidx = request.getParameter("tidx");
+String hidx = request.getParameter("hidx");
 
 Connection conn = null;
 PreparedStatement psmt = null;
 ResultSet rs = null;
 
-String tsubject_ = "";
-String twriter_ = "";
-String tcontent_ = "";
-String twriteday_ = "";
-int thit_=0;
-int tidx_ = 0;
+String hsubject_ = "";
+String hwriter_ = "";
+String hcontent_ = "";
+String hwriteday_ = "";
+int hhit_=0;
+int hidx_ = 0;
 
 try {
 	conn = DBManager.getConnection();
 
-	String sql = " select * from teamboard where tidx= " + tidx;
+	String sql = " select * from hiboard where hidx= " + hidx;
 	psmt = conn.prepareStatement(sql);
 	rs = psmt.executeQuery();
 
 	if (rs.next()) {
-		tsubject_ = rs.getString("tsubject");
-		twriter_ = rs.getString("twriter");
-		tcontent_ = rs.getString("tcontent");
-		twriteday_=rs.getString("twriteday");
-		tidx_ = rs.getInt("tidx");
+		hsubject_ = rs.getString("hsubject");
+		hwriter_ = rs.getString("hwriter");
+		hcontent_ = rs.getString("hcontent");
+		hwriteday_=rs.getString("hwriteday");
+		hidx_ = rs.getInt("hidx");
 	}
 
 } catch (Exception e) {
@@ -65,33 +65,33 @@ try {
 	<section>
 		<article>
 			<form action="modifOk.jsp" method="post">
-			<input type="hidden" name="tidx" value="<%=tidx_%>">
+			<input type="hidden" name="hidx" value="<%=hidx_%>">
 				<table border="1" class="table table-bordered">
 					<thead>
 						<tr>
 							<th class="tabth">글번호</th>
-							<th class="tabth2"><%=tidx_%></th>
+							<th class="tabth2"><%=hidx_%></th>
 							<th class="tabth">작성자</th>
-							<th class="tabth2"><%=twriter_%></th>
+							<th class="tabth2"><%=hwriter_%></th>
 							<th class="tabth">등록일</th>
-							<th class="tabth2"><%=twriteday_%></th>
+							<th class="tabth2"><%=hwriteday_%></th>
 							<th class="tabth">조회수</th>
-							<th class="tabth2"><%=thit_%></th>
+							<th class="tabth2"><%=hhit_%></th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<th class="tabth">제목</th>
-							<td colspan="7" class="tabth2"><input type="text" size="50" name="tsubject" value="<%=tsubject_%>"></td>
+							<td colspan="7" class="tabth2"><input type="text" size="50" name="hsubject" value="<%=hsubject_%>"></td>
 						</tr>
 						<tr class="textarea">
-							<td colspan="8" rowspan="3" class="trtd"><textarea name="tcontent" rows="3"><%=tcontent_%></textarea></td>
+							<td colspan="8" rowspan="3" class="trtd"><textarea name="hcontent" rows="3"><%=hcontent_%></textarea></td>
 						</tr>
 					</tbody>
 				</table>
-				<input class="teambtn" type="submit" value="저장">
-				<button class="teambtn" type="button"
-					onclick="location.href='teamboard.jsp?tidx=<%=tidx%>&searchType=<%=searchType%>&searchValue=<%=searchValue%>'">취소</button>
+				<input type="submit" value="저장">
+				<button type="button"
+					onclick="location.href='view.jsp?hidx=<%=hidx%>&searchType=<%=searchType%>&searchValue=<%=searchValue%>'">취소</button>
 			</form>
 		</article>
 	</section>

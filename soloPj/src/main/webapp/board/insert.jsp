@@ -53,8 +53,8 @@ if (ilogin != null) {
 					</tr>
 				</tbody>
 			</table>
-			<input type="submit" value="등록">
-			<input type="button" value="취소" onclick="location.href='fboard.jsp'">
+			<input class="btn" type="submit" value="등록">
+			<input class="btn" type="button" value="취소" onclick="location.href='fboard.jsp'">
 
 		</form>
 		
